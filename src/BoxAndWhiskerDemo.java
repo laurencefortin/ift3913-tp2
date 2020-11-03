@@ -1,5 +1,6 @@
 
 
+import java.awt.Color;
 import java.awt.Font;
 import java.io.IOException;
 import java.io.Reader;
@@ -35,18 +36,31 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
      *
      * @param title  the frame title.
      */
-    public BoxAndWhiskerDemo(final String title) {
+    public BoxAndWhiskerDemo(final String title, ArrayList<Classe> liste) {
 
         super(title);
         
-        final BoxAndWhiskerCategoryDataset dataset = createSampleDataset();
+        final BoxAndWhiskerCategoryDataset dataset = createSampleDataset(liste);
 
         final CategoryAxis xAxis = new CategoryAxis("Type");
         final NumberAxis yAxis = new NumberAxis("Value");
-        yAxis.setAutoRangeIncludesZero(false);
+        yAxis.setAutoRangeIncludesZero(true);
         final BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
         renderer.setFillBox(false);
         renderer.setToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
+        renderer.setFillBox(true);
+        renderer.setSeriesPaint(0, Color.WHITE);
+        renderer.setSeriesPaint(1, Color.LIGHT_GRAY);
+        renderer.setSeriesOutlinePaint(0, Color.BLACK);
+        renderer.setSeriesOutlinePaint(1, Color.BLACK);
+        renderer.setUseOutlinePaintForWhiskers(true);   
+        Font legendFont = new Font("SansSerif", Font.PLAIN, 16);
+        renderer.setLegendTextFont(0, legendFont);
+        renderer.setLegendTextFont(1, legendFont);
+        renderer.setMedianVisible(true);
+        renderer.setMeanVisible(true);
+        renderer.setMaximumBarWidth(0.5);
+
         final CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
 
         final JFreeChart chart = new JFreeChart(
@@ -66,13 +80,14 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
      * 
      * @return A sample dataset.
      */
-    private BoxAndWhiskerCategoryDataset createSampleDataset() {
+    private BoxAndWhiskerCategoryDataset createSampleDataset(ArrayList<Classe> liste) {
         
-        final int seriesCount = 3;
-        final int categoryCount = 4;
-        final int entityCount = 10;
+        final int seriesCount = 4;
+        final int categoryCount = 1;
+        final int entityCount = 1;
         
-        final DefaultBoxAndWhiskerCategoryDataset dataset 
+        
+  /*     final DefaultBoxAndWhiskerCategoryDataset dataset 
             = new DefaultBoxAndWhiskerCategoryDataset();
         for (int i = 0; i < seriesCount; i++) {
             for (int j = 0; j < categoryCount; j++) {
@@ -89,8 +104,43 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
                 dataset.add(list, "C" + i, " Categorie " + j);
             }
             
+        }*/
+        
+        
+        final DefaultBoxAndWhiskerCategoryDataset dataset = new DefaultBoxAndWhiskerCategoryDataset();
+        final List list = new ArrayList();
+        /*for (int i = 0; i < liste.size(); i++) {
+        	{
+        		list.add(liste.get(i).NOM);
+            };
+            
         }
-
+        dataset.add(list, "Classes", "NOM");
+        list.clear();*/
+        for (int i = 0; i < liste.size(); i++) {
+        	{
+        		list.add(liste.get(i).CAC);
+            };
+            
+        }
+        dataset.add(list, "Classes", "CAC");
+        list.clear();
+        for (int i = 0; i < liste.size(); i++) {
+        	{
+        		list.add(liste.get(i).DIT);
+            };
+            
+        }
+        dataset.add(list, "Classes", "DIT");
+        list.clear();
+        for (int i = 0; i < liste.size(); i++) {
+        	{
+        		list.add(liste.get(i).NEC);
+            };
+            
+        }
+        dataset.add(list, "Classes", "NEC");
+        
         return dataset;
     }
     
@@ -104,11 +154,8 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
      */
     public static void main(final String[] args) throws IOException {
 
+    	 ArrayList<Classe> liste = new ArrayList<Classe>();
         //Log.getInstance().addTarget(new PrintStreamLogTarget(System.out));
-        final BoxAndWhiskerDemo demo = new BoxAndWhiskerDemo("Box-and-Whisker Chart Demo");
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
         
         try (           		
                 Reader reader = Files.newBufferedReader(Paths.get("./tp2_donnees.csv"));
@@ -134,9 +181,14 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
                     System.out.println("---------------\n\n");
                     
                     Classe temp = new Classe(id, Integer.parseInt(NOM), Integer.parseInt(DIT), Integer.parseInt(CAC), Integer.parseInt(NEC));
-                    //Classe classe = new Classe()
+                    liste.add(temp);
                 }
             }
+
+        final BoxAndWhiskerDemo demo = new BoxAndWhiskerDemo("Box-and-Whisker Chart Demo", liste);
+        demo.pack();
+        RefineryUtilities.centerFrameOnScreen(demo);
+        demo.setVisible(true);
 
     }
 
