@@ -25,11 +25,6 @@ import org.jfree.ui.RefineryUtilities;
 import org.jfree.util.Log;
 import org.jfree.util.LogContext;
 
-/**
- * Demonstration of a box-and-whisker chart using a {@link CategoryPlot}.
- *
- * author David Browning
- */
 public class BoxAndWhiskerDemo extends ApplicationFrame {
 
     /** Access to logging facilities. */
@@ -138,6 +133,7 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
                     System.out.println("NEC : " + NEC);
                     System.out.println("---------------\n\n");
                     
+                    Classe temp = new Classe(id, Integer.parseInt(NOM), Integer.parseInt(DIT), Integer.parseInt(CAC), Integer.parseInt(NEC));
                     //Classe classe = new Classe()
                 }
             }
