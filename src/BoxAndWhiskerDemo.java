@@ -59,7 +59,7 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
         renderer.setLegendTextFont(1, legendFont);
         renderer.setMedianVisible(true);
         renderer.setMeanVisible(true);
-        renderer.setMaximumBarWidth(0.5);
+        renderer.setMaximumBarWidth(0.05);
 
         final CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
 
@@ -109,7 +109,7 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
         
         final DefaultBoxAndWhiskerCategoryDataset dataset = new DefaultBoxAndWhiskerCategoryDataset();
         final List list = new ArrayList();
-        /*for (int i = 0; i < liste.size(); i++) {
+       /* for (int i = 0; i < liste.size(); i++) {
         	{
         		list.add(liste.get(i).NOM);
             };
@@ -141,6 +141,8 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
         }
         dataset.add(list, "Classes", "NEC");
         
+        System.out.println(dataset.getMeanValue(0, 0));
+        System.out.println(dataset.getMedianValue(0, 0));
         return dataset;
     }
     
