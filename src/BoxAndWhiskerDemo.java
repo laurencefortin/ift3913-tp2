@@ -1,5 +1,3 @@
-
-
 import java.awt.Color;
 import java.awt.Font;
 import java.io.IOException;
@@ -47,7 +45,7 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
         yAxis.setAutoRangeIncludesZero(true);
         final BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
         renderer.setFillBox(false);
-        renderer.setToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
+       // renderer.setToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
         renderer.setFillBox(true);
         renderer.setSeriesPaint(0, Color.WHITE);
         renderer.setSeriesPaint(1, Color.LIGHT_GRAY);
@@ -59,12 +57,12 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
         renderer.setLegendTextFont(1, legendFont);
         renderer.setMedianVisible(true);
         renderer.setMeanVisible(true);
-        renderer.setMaximumBarWidth(0.05);
+        renderer.setMaximumBarWidth(0.07);
 
         final CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
 
         final JFreeChart chart = new JFreeChart(
-            "Box-and-Whisker Demo",
+            "Boï¿½tes ï¿½ moustaches",
             new Font("SansSerif", Font.BOLD, 14),
             plot,
             true
@@ -108,8 +106,8 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
         
         
         final DefaultBoxAndWhiskerCategoryDataset dataset = new DefaultBoxAndWhiskerCategoryDataset();
-        final List list = new ArrayList();
-    /*    for (int i = 0; i < liste.size(); i++) {
+        final List<Integer> list = new ArrayList();
+       /* for (int i = 0; i < liste.size(); i++) {
         	{
         		if(liste.get(i).NOM > 30)
         		{
@@ -150,8 +148,8 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
         
         System.out.println("Moyenne : " + dataset.getMeanValue(0, 0));
         System.out.println("Mediane : " + dataset.getMedianValue(0, 0));
-        System.out.println("Mediane du quartile inférieur:" + dataset.getQ1Value(0, 0));
-        System.out.println("Mediane du quartile supérieur:" +dataset.getQ3Value(0, 0));
+        System.out.println("Mediane du quartile infï¿½rieur:" + dataset.getQ1Value(0, 0));
+        System.out.println("Mediane du quartile supï¿½rieur:" +dataset.getQ3Value(0, 0));
         double taille = (double)dataset.getQ3Value(0, 0) - (double)dataset.getQ1Value(0,0);
         System.out.println("Taille de la boite: " + taille);
         double limiteSuperieure = (double)dataset.getQ3Value(0, 0) + 1.5*taille;
@@ -206,10 +204,10 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
                 }
             }
 
-        final BoxAndWhiskerDemo demo = new BoxAndWhiskerDemo("Box-and-Whisker Chart Demo", liste);
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
+        final BoxAndWhiskerDemo donnï¿½esBoiteMoustache = new BoxAndWhiskerDemo("Boï¿½tes ï¿½ moustaches", liste);
+        donnï¿½esBoiteMoustache.pack();
+        RefineryUtilities.centerFrameOnScreen(donnï¿½esBoiteMoustache);
+        donnï¿½esBoiteMoustache.setVisible(true);
 
     }
 
