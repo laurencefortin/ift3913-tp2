@@ -109,14 +109,18 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
         
         final DefaultBoxAndWhiskerCategoryDataset dataset = new DefaultBoxAndWhiskerCategoryDataset();
         final List list = new ArrayList();
-       /* for (int i = 0; i < liste.size(); i++) {
+    /*    for (int i = 0; i < liste.size(); i++) {
         	{
-        		list.add(liste.get(i).NOM);
+        		if(liste.get(i).NOM > 30)
+        		{
+        			list.add(liste.get(i).NOM);
+        		}
+
             };
             
         }
-        dataset.add(list, "Classes", "NOM");
-        list.clear();*/
+        dataset.add(list, "Classes", "NOM");*/
+/*        list.clear();
         for (int i = 0; i < liste.size(); i++) {
         	{
         		list.add(liste.get(i).CAC);
@@ -131,18 +135,33 @@ public class BoxAndWhiskerDemo extends ApplicationFrame {
             };
             
         }
-        dataset.add(list, "Classes", "DIT");
-        list.clear();
+        dataset.add(list, "Classes", "DIT");*/
+    //   list.clear();
         for (int i = 0; i < liste.size(); i++) {
         	{
-        		list.add(liste.get(i).NEC);
+        	//	if(liste.get(i).NOM <= 30)
+        	//	{
+        			list.add(liste.get(i).CAC);
+        	//	}
             };
             
         }
-        dataset.add(list, "Classes", "NEC");
+        dataset.add(list, "Classes", "CAC");
         
-        System.out.println(dataset.getMeanValue(0, 0));
-        System.out.println(dataset.getMedianValue(0, 0));
+        System.out.println("Moyenne : " + dataset.getMeanValue(0, 0));
+        System.out.println("Mediane : " + dataset.getMedianValue(0, 0));
+        System.out.println("Mediane du quartile inférieur:" + dataset.getQ1Value(0, 0));
+        System.out.println("Mediane du quartile supérieur:" +dataset.getQ3Value(0, 0));
+        double taille = (double)dataset.getQ3Value(0, 0) - (double)dataset.getQ1Value(0,0);
+        System.out.println("Taille de la boite: " + taille);
+        double limiteSuperieure = (double)dataset.getQ3Value(0, 0) + 1.5*taille;
+        System.out.println("Limite superieure :" + limiteSuperieure);
+        double limiteInferieure = (double)dataset.getQ1Value(0, 0) - 1.5*taille;
+        if(limiteInferieure < (double)dataset.getMinOutlier(0, 0))
+        {
+        	limiteInferieure = (double)dataset.getMinOutlier(0, 0);
+        }
+        
         return dataset;
     }
     
